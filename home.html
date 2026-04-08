@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="home.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+main {
+  justify-content: center;
+    height: auto;
+    min-height: 100vh;
+    background-color: whitesmoke;
+    background-size: cover;
+    background-position: center;
+    padding-top: 80px;
+    background-attachment: fixed;
+
+
+}
+
+a {
+    text-decoration: none;
+    color: azure;
+}
+
+
+
+.navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 80px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+     justify-content: flex-start;
+    background: pink;
+    z-index: 1000;
+}
+
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    height: 100vh;
+    padding: 50px 100px 0;
+    min-height: 100hv;
+}
+
+.icons {
+    position: relative;
+    top: 0px;
+    margin-right: auto;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background: none;
+    border: none;
+    border-radius: 0;
+    z-index: 1;
+    transition: transform 0.5s ease;
+
+}
+
+.shift-right {
+  position: fixed;
+  top: 7px;
+  left: 20px;
+  transform: translateX(75px);
+  border-radius: 50%; 
+  border: 3px solid gold;
+  transition: all 0.5s ease;
+}
+
+.icons img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border-radius: inherit;
+  transition: inherit;
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background: #333;
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s;
+  padding-top: 60px;
+}
+
+#sidebar a {
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  color: white;
+  padding: 10px 20px;
+  margin: 5px 10px;
+  text-decoration: none;
+  transition: all 0.5s ease;
+  cursor: default;
+}
+
+#sidebar a i {
+  margin-right: 10px;
+  transition: color 0.3s;
+   position: relative;
+  z-index: 1;
+}
+
+#sidebar a span {
+  position: relative;
+  z-index: 1;
+}
+
+
+
+#sidebar a:hover {
+  background: white;
+  color: black;
+
+}
+
+#sidebar a:hover i {
+  color: black;
+}
+
+#sidebar a:hover i {
+  color: black;
+}
+
+
+#sidebar .logout {
+  margin-top: auto;
+
+}
+
+#sidebar a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+  z-index: 0;
+}
+
+#sidebar a:hover::before {
+  transform: translateX(0);
+
+}
+
+#sidebar a:hover span {
+  color: black;
+}
+
+#sidebar.active {
+  left: 0;
+}
+
+.sidebar-title {
+  color: white;
+  text-align: center;
+  padding: 15px 20px;
+  margin: 0 0 10px 0;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* optional: garis bawah */
+}
+
+/* Dark mode*/
+body.dark #sidebar {
+  background: #1e1e1e;
+}
+
+body.dark #sidebar a {
+  color: white;
+}
+
+body.dark #sidebar a:hover {
+  background: white;
+  color: black;
+}
+
+/* Light mode*/
+body.light #sidebar {
+  background: #f0f0f0;
+}
+
+body.light #sidebar a {
+  color: black;
+}
+
+body.light #sidebar a:hover {
+  background: black;
+  color:white;
+}
+
+body.light #sidebar a::before {
+  background: black;
+}
+
+body.dark #sidebar a::before {
+  background: white;
+}
+
+body.light .sidebar-title {
+  color: black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+body.dark .sidebar-title {
+  color: white;
+}
+
+body.light #sidebar a:hover span {
+  color: white;
+}
+
+body.light #sidebar a:hover i {
+  color: white;
+}
+
+body.light #sidebar a:hover i {
+  color: white;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: chocolate;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  width: 300px;
+  height: 350px;
+  text-align: center;
+  z-index: 100;
+}
+
+#closeModalBtn {
+  position: fixed;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  top: 5px;
+  right: 5px;
+  font-size: 24px;
+  background-color: rgb(27, 26, 26);
+  border-radius: 6px;
+  cursor: default;
+  transition: background 0.2s;
+}
+
+#closeModalBtn:hover {
+  background: #f00;
+}
+
+.card{
+    background-color: rgb(221, 171, 106);
+    position: absolute;
+    top: 20px;
+    left: 15px;
+    width: 270px;
+    height: 310px;
+    border-radius: 12px;
+}
+
+.card2{
+    background-color: rgb(218, 161, 87);
+    position: absolute;
+    top: 150px;
+    left: 10px;
+    width: 250px;
+    height: 150px;
+    border-radius: 12px;
+}
+
+
+.profile-pic img {
+  position: relative;
+  top: 10px;
+  right: 85px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid;
+  border-color: gold ;
+
+}
+
+.img img {
+ position: fixed;
+ top: 30px;
+ right: 30px;
+ border: 3px solid;
+ border-color: rgba(255, 217, 0, 0.74);
+ border-radius: 6px;
+
+}
+
+.id {
+  color: #fcecd2;
+  font-size: 10px;
+  position: fixed;
+  top: 114px;
+  left: 25px;
+}
+
+.copy-btn {
+  position: fixed;
+  top: 112px;
+  left: 100px;
+  font-size: 12px;
+  cursor: pointer;
+  background-color: rgb(221, 171, 106);
+  border: none;
+  transition: background: 0.2s;
+
+}
+
+#notif {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: black;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: 0.3s;
+
+}
+
+#notif.show {
+  opacity: 1;
+}
+
+.copy-btn:hover {
+  background: #ddd;
+}
+
+
+#customInputWrapper {
+  background: rgba(255, 255, 225, 0.2);         
+  border: 2px solid #333;    
+  border-radius: 10px;       
+  padding: 20px;             
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+}
+
+#customInputWrapper input {
+  padding: 5px 10px;
+  margin-right: 10px;
+}
+#customInputWrapper button {
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.profile-info {
+  position: absolute;
+  top: 110px;
+  left: 10px;
+  font-size: 18px;
+  background-color:grey;
+  display: flex ;
+  align-items: center;
+  width: auto;
+  color: #fff;
+  border: 2px solid;
+  border-color: #333;
+}
+
+.profile-info input {
+  color: white;
+  width: 100px;
+  font-size: 16px;
+  display: none; 
+  background: rgba(0,0,0, .1);
+
+}
+
+.profile-info button {
+  left: 55px;
+  margin-left: 20px;
+  padding: 5px 5px;
+  border: none;
+  background: #333;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.profile-info button:hover {
+  background: #555;
+}
+
+.box {
+  position: fixed;
+  top: 190px;
+  right: 50px;
+  width: 200px;
+  height: 25px;
+  background: lightblue;
+  border-radius: 20px 20px 0 0;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+
+
+}
+
+.slot1 {
+  position: fixed;
+  top: 193px;
+  right: 50px;
+  width: 200px;
+  height: 25px;
+  border-bottom: 3px solid rgba(190, 96, 28, .9);
+
+}
+
+
+.info-box {
+  position: fixed;
+  top: -30px;
+  right: 0px;
+  width: 300px;
+  height: 200px;
+  padding: 10px;
+  background: lightblue;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  margin-top: 10px;
+  display: none;
+  z-index: 100;
+
+
+}
+
+.setting {
+  display: none;
+  position: fixed;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: chocolate;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  width: 300px;
+  height: 350px;
+  text-align: center;
+
+}
+
+#closeSettingBtn {
+  position: fixed;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  top: 4px;
+  right: 4px;
+  font-size: 24px;
+  background-color: rgb(27, 26, 26);
+  color: #fff;
+  border-radius: 6px;
+  cursor: default;
+  transition: background 0.2s;
+  z-index: 100;
+}
+
+#closeSettingBtn:hover {
+  background: #f00;
+}
+
+.lightBtn {
+  width: 250px;
+  height: 50px;
+  color: #ffffff;
+  background: #333;
+  border-radius: 6px;
+  border: coral;
+  transition: background 0.2s;
+}
+
+body.dark .lightBtn{
+  background: gold;
+  color: #333;
+  transition: background 0.2s;
+}
+
+body.dark .lightBtn:hover{
+  background: rgba(255, 215, 0, 0.8);
+}
+
+body.light .lightBtn:hover{
+  background: rgba(85, 85, 85, 0.8);
+}
+
+.contact {
+  display: none;
+  position: fixed;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: chocolate;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  width: 300px;
+  height: 350px;
+  text-align: center;
+
+}
+
+.ig {
+  display: flex;
+  position: fixed;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  background: rgb(245, 222, 179);
+  border: none;
+  width: 250px;
+  height: 50px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: default;
+}
+
+.ig:hover {
+  background: rgba(245, 222, 179, .9) ;
+}
+
+.ig p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000;
+}
+
+#closeContactBtn {
+  position: fixed;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  top: 4px;
+  right: 4px;
+  font-size: 24px;
+  background-color: rgb(27, 26, 26);
+  color: #fff;
+  border-radius: 6px;
+  cursor: default;
+  transition: background 0.2s;
+  z-index: 100;
+}
+
+#closeContactBtn:hover {
+  background: #f00;
+}
+
+.tt {
+  display: flex;
+  position: fixed;
+  top: 80px;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  background: rgb(245, 222, 179);
+  border: none;
+  width: 250px;
+  height: 50px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: default;
+}
+
+.tt:hover {
+  background: rgba(245, 222, 179, .9) ;
+}
+
+.tt p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000;
+}
+
+.wa {
+  display: flex;
+  position: fixed;
+  top: 136px;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  background: rgb(245, 222, 179);
+  border: none;
+  width: 250px;
+  height: 50px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: default;
+
+}
+
+.wa:hover {
+  background: rgba(245, 222, 179, .9) ;
+}
+
+.wa p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #000;
+  margin-right: 55px;
+
+}
+
+.my-swal-image {
+  border-radius: 50%;
+  overflow: hidden;
+
+}
+
+.logoutMdl {
+  display: none;
+  position: fixed;
+  justify-content: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: chocolate;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+  width: 300px;
+  height: 150px;
+  text-align: center;
+}
+
+.logoutMdl h3 {
+  position: relative;
+  left: 50px;
+}
+
+.logoutMdl button {
+ position: relative;
+  align-items: center;
+  text-align: center;
+  width: 80px;
+  height: 24px;
+  top: 60px;
+  right: 80px;
+  font-size: 18px;
+  background-color: rgb(10, 197, 48);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: default;
+  transition: background 0.2s;
+  z-index: 100;
+}
+
+.logoutMdl button:hover {
+  background-color: rgba(10, 197, 48, 0.8);
+}
+
+#closeLogoutBtn {
+  position: relative;
+  align-items: center;
+  text-align: center;
+  width: 100px;
+  height: 24px;
+  top: 60px;
+  right: 60px;
+  font-size: 15px;
+  background-color: rgb(255, 0, 0);
+  color: #fff;
+  border-radius: 6px;
+  cursor: default;
+  transition: background 0.2s;
+  z-index: 100;
+  transition: background 0.2s;
+}
+
+#closeLogoutBtn:hover {
+  background: #000;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  margin: auto;
+  overflow: hidden;
+  z-index: 1;
+ }
+
+
+
+
+.slides {
+  display: flex;
+  transition: 0.5s;
+}
+
+.slides img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* tombol */
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.dots {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.dots span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background: white;
+  margin: 0 5px;
+  border-radius: 50%;
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.dots .active {
+  opacity: 1;
+  background: gold;
+}
+
+.nav i {
+  font-size: 24px;
+  z-index: 1001;
+}
+
+.news-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.news-card {
+    top:80px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+}
+
+.news-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.news-card h3 {
+  padding: 10px;
+  font-size: 18px;
+}
+
+.news-card p {
+  padding: 0 10px 10px;
+  font-size: 14px;
+  color: gray;
+}
+
+   </style>
+</head>
+
+<body>
+    
+    
+
+   <div class="slider">
+    <div class="dots" id="dots"></div>
+  <div class="slides" id="slides">
+    <img src="https://animecorner.me/wp-content/uploads/2022/09/FRIEREN-journey.jpg">
+    <img src="https://a-static.besthdwallpaper.com/frieren-vs-knights-from-frieren-beyond-journey-s-end-wallpaper-3554x1999-137140_53.jpg">
+    <img src="https://wallpaperaccess.com/full/10989883.jpg">
+    <img src="https://animecorner.me/wp-content/uploads/2022/09/FRIEREN-journey.jpg">
+  </div>
+
+  <button class="prev" onclick="prevSlide()">❮</button>
+  <button class="next" onclick="nextSlide()">❯</button>
+</div>
+
+
+<nav class="navbar">
+
+
+       <button onclick="toggleSidebar()" class="icons" id="icons">
+        <img id="iconImg"src="https://i.pinimg.com/originals/ec/03/db/ec03dbdeb40d70a2d11a428a15a3ef2e.jpg" width="60px";>
+       </button>
+
+       <a id="search"> <i class="bx bx-search"></i></a>
+
+
+       <div id="sidebar">
+        <h3 class="sidebar-title" id="dashboardName">Bluzzz</h3>
+<a id="profile"> <i class='bx bx-user'></i><span>Profile</span></a>
+<a id="setting"> <i class='bx bx-cog'></i><span>Settings</span></a>
+<a  id="favorite"> <i class="bx bx-star"></i><span>Favorites</span></a>
+<a  id="contact"> <i class='bx bx-phone'></i><span>Contact</span></a>
+ <a id="logout" class="logout"> <i class='bx bx-log-out'></i><span>Logout</span></a>
+
+
+ <div id="profileModal" class="modal">
+    <div class="card"><div class="card2"></div>
+    <div class="profile-pic">
+      <img id="profileImg"src="https://i.pinimg.com/originals/ec/03/db/ec03dbdeb40d70a2d11a428a15a3ef2e.jpg" alt="Profile Picture">
+    </div>
+    <div class="img">
+      <img id="mainImg"src="Gmabar" width="100px" height="130px">
+    </div>
+    <div class="box" id="box"></div>
+    <div id="slot1" class="slot1"></div>
+ <div class="info-box" id="infoBox"></div>
+ <p id="id" class="id">ID: 461117788</p>
+ <button onclick="copyText()" class="copy-btn">
+  <i class='bx bx-copy'></i>
+ </button>
+ <div id="notif">Copied!</div>
+
+    <div class="profile-info">
+      <span id="closeModalBtn">&times;</span>
+      <span id="profileName" style="margin-left: 5px;">My Dashboard</span>
+      <button id="editNameBtn">✏️</button>
+       <input type="text" id="profileNameInput" style="display:none;">
+      <button id="saveNameBtn" style="display: none;">Confirm</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<div id="settingModal" class="setting">
+  <span id="closeSettingBtn">&times;</span>
+
+  <button onclick="toggleTheme('light')"  id="themeBtn" class="lightBtn">☀️ Light Mode</button>
+</div>
+
+<div id="contactModal" class="contact">
+  <span id="closeContactBtn">&times;</span>
+  <button class="ig">
+    <p><img src="https://static.vecteezy.com/system/resources/previews/024/170/870/original/instagram-icon-logo-symbol-free-png.png" width="20px" height="20px">@hydrobluzzz</p>
+  </button>
+
+  <button class="tt">
+    <p><img src="https://th.bing.com/th/id/OIP._oOHOye6mtd4XXtXS40h0AHaHk?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3" width="20px" height="20px">@pyroobluzzz</p>
+  </button>
+
+  <button class="wa">
+    <p><img src="https://clipart.info/images/ccovers/1499955335whatsapp-icon-logo-png.png" width="20px" height="20px">Admin</p>
+  </button>
+</div>
+
+<div id="logoutModal" class="logoutMdl">
+  <h3>Are you sure want to logout?</h3>
+  <button id="logoutConfirmBtn">YES</button>
+  <span id="closeLogoutBtn">Cancel</span>
+</div>
+
+  </nav>
+
+
+
+    <main>
+
+        <div class="content">
+          <div class="news-container">
+  <div id="news1" "class="news-card">
+    <img src="https://picsum.photos/300/200?1">
+    <h3>Laut Dan Sang Nahkoda</h3>
+    <p>Cipt: Tore Adrian D.</p>
+  </div>
+              
+              <div id="page1" class="news1-page"></div>        
+
+  <div class="news-card">
+    <img src="https://picsum.photos/300/200?2">
+    <h3>News2</h3>
+    <p>Deskripsi</p>
+  </div>
+
+  <div class="news-card">
+    <img src="https://picsum.photos/300/200?3">
+    <h3>News3</h3>
+    <p>Deskripsi</p>
+  </div>
+
+  <div class="news-card">
+    <img src="https://picsum.photos/300/200?4">
+    <h3>News4</h3>
+    <p>Deskripsi</p>
+  </div>
+              
+  </div>            
+  
+</div>
+        </div>
+
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+window.addEventListener('load', () => {
+
+    const name = localStorage.getItem("name");
+    const icon = localStorage.getItem("icon");
+
+    if(name && icon){
+        Swal.fire({
+            title: "Success!",
+            text: "Welcome, " + name + "!",
+            imageUrl: icon,
+            imageWidth: 100,
+            imageHeight: 100,
+            imageAlt: name,
+            icon: "success",
+            confirmButtonText: "Thanks!",
+             customClass: {
+              image: 'my-swal-image'
+             }
+        });
+    }
+});
+</script>
+
+<script>
+let index = 0;
+
+const slides = document.getElementById("slides");
+const total = slides.children.length;
+const dotsContainer = document.getElementById("dots");
+const realTotal = total - 1;
+
+
+function showSlide() {
+  slides.style.transition = "0.5s";
+  slides.style.transform = `translateX(-${index * 100}%)`;
+}
+
+// bikin dots
+for (let i = 0; i < realTotal; i++) {
+  const dot = document.createElement("span");
+  dot.addEventListener("click", () => {
+    index = i;
+    showSlide();
+    updateDots();
+  });
+  dotsContainer.appendChild(dot);
+}
+
+function updateDots() {
+  const dots = dotsContainer.children;
+  for (let i = 0; i < dots.length; i++) {
+    dots[i].classList.remove("active");
+  }
+  dots[index % realTotal].classList.add("active");
+}
+
+function nextSlide() {
+  index++;
+  showSlide();
+
+  if (index === total - 1) {
+    setTimeout(() => {
+      slides.style.transition = "none"; // matiin animasi
+      index = 0; // balik ke awal
+      slides.style.transform = `translateX(0)`;
+    }, 500);
+  }
+}
+
+function prevSlide() {
+  if (index === 0) {
+
+    slides.style.transition = "none";
+    index = total - 1;
+    slides.style.transform = `translateX(-${index * 100}%)`;
+
+    setTimeout(() => {
+      slides.style.transition = "0.5s";
+      index--;
+      showSlide();
+    }, 50);
+  } else {
+    index--;
+    showSlide();
+  }
+}
+
+let autoSlide = setInterval(nextSlide, 3000);
+
+const slider = document.querySelector(".slider");
+
+slider.addEventListener("mouseenter", () => {
+  clearInterval(autoSlide);
+});
+
+slider.addEventListener("mouseleave", () => {
+  autoSlide = setInterval(nextSlide, 3000);
+});
+
+let startX = 0;
+let endX = 0;
+
+const sliderArea = document.querySelector(".slider");
+
+sliderArea.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+});
+
+sliderArea.addEventListener("touchend", (e) => {
+  endX = e.changedTouches[0].clientX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  if (startX - endX > 50) {
+    nextSlide(); // swipe kiri
+  } else if (endX - startX > 50) {
+    prevSlide(); // swipe kanan
+  }
+}
+
+</script>
+
+    <script>
+function copyText() {
+  const teks = document.getElementById("id").innerText;
+  const notif = document.getElementById("notif");
+
+  navigator.clipboard.writeText(teks).then(() => {
+    notif.classList.add("show");
+    setTimeout(() => {
+      notif.classList.remove("show");
+    }, 1500);
+
+  })
+}
+</script>
+
+    <script>
+function toggleSidebar() {
+  document.getElementById("sidebar").classList.toggle("active");
+}
+</script
